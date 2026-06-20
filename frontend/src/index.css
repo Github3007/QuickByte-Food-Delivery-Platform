@@ -1,0 +1,175 @@
+:root {
+    --bg: #fbfaf7;
+    --surface: #ffffff;
+    --surface-soft: #f4f1ea;
+    --surface-layer: rgba(255, 255, 255, 0.96);
+    --text: #34322f;
+    --text-muted: #746f66;
+    --heading: #171511;
+    --border: #e7dfd1;
+    --accent: #f35d32;
+    --accent-strong: #c83c1c;
+    --accent-soft: #fff0e9;
+    --fresh: #0f9f7a;
+    --fresh-soft: #e6f7ef;
+    --danger: #c52b2b;
+    --danger-soft: #ffe9e5;
+    --success: #087b5f;
+    --success-soft: #e4f7ee;
+    --warning: #a76300;
+    --warning-soft: #fff6dc;
+    --ink: #1f2933;
+    --shadow: 0 18px 44px rgba(45, 38, 26, 0.12);
+    --shadow-soft: 0 10px 26px rgba(45, 38, 26, 0.08);
+    --radius: 8px;
+    --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    color: var(--text);
+    background: var(--bg);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.5;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme="dark"] {
+    --bg: #11100e;
+    --surface: #1b1a17;
+    --surface-soft: #28251f;
+    --surface-layer: rgba(27, 26, 23, 0.96);
+    --text: #f5efe3;
+    --text-muted: #c9bfae;
+    --heading: #fff8ed;
+    --border: rgba(226, 215, 195, 0.16);
+    --accent: #ff855f;
+    --accent-strong: #ffb38f;
+    --accent-soft: rgba(255, 133, 95, 0.15);
+    --fresh: #52d3ad;
+    --fresh-soft: rgba(82, 211, 173, 0.14);
+    --danger: #ff8a80;
+    --danger-soft: rgba(255, 138, 128, 0.15);
+    --success: #63dfb8;
+    --success-soft: rgba(99, 223, 184, 0.14);
+    --warning: #ffd166;
+    --warning-soft: rgba(255, 209, 102, 0.14);
+    --ink: #fff8ed;
+    --shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
+    --shadow-soft: 0 10px 26px rgba(0, 0, 0, 0.22);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--text);
+    background:
+        linear-gradient(180deg, rgba(255, 248, 235, 0.9) 0%, rgba(251, 250, 247, 0) 28rem),
+        var(--bg);
+}
+
+:root[data-theme="dark"] body {
+    background:
+        linear-gradient(180deg, rgba(51, 39, 29, 0.58) 0%, rgba(17, 16, 14, 0) 28rem),
+        var(--bg);
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+}
+
+a {
+    color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--heading);
+    line-height: 1.12;
+    letter-spacing: 0;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+h3 {
+    font-size: 1rem;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--text);
+    padding: 0.78rem 0.9rem;
+    outline: none;
+    transition:
+        border-color 140ms ease,
+        box-shadow 140ms ease,
+        background 140ms ease;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(243, 93, 50, 0.16);
+}
+
+label {
+    display: grid;
+    gap: 0.45rem;
+    color: var(--heading);
+    font-weight: 750;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+@media (max-width: 720px) {
+    h1 {
+        font-size: 2.15rem;
+    }
+}

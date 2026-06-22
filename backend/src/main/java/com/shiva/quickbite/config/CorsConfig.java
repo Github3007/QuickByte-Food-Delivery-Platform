@@ -17,8 +17,9 @@ public class CorsConfig {
         CorsConfiguration configuration =
                 new CorsConfiguration();
 
-        configuration.setAllowedOrigins(
-                List.of("http://localhost:5173")
+        configuration.setAllowedOriginPatterns(
+                List.of("http://localhost:5173",
+                        "https://quick-byte-food-delivery-platform.vercel.app/")
         );
 
         configuration.setAllowedMethods(

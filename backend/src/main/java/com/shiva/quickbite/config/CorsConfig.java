@@ -19,7 +19,7 @@ public class CorsConfig {
 
         configuration.setAllowedOriginPatterns(
                 List.of("http://localhost:5173",
-                        "https://quick-byte-food-delivery-platform.vercel.app/")
+                        "https://quick-byte-food-delivery-platform.vercel.app")
         );
 
         configuration.setAllowedMethods(

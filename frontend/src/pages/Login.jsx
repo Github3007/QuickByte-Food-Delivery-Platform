@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import api, { ROLES, getApiErrorMessage, getRoleHome, resolveStoredSessionRole, setAuthToken } from "../services/api";
+import api, { ROLES, getApiErrorMessage, getRoleHome, setAuthToken, readStoredSession } from "../services/api";
 import toast from "react-hot-toast";
 
 function Login({ onLogin }) {
@@ -23,7 +23,7 @@ function Login({ onLogin }) {
         try {
             const response = await api.post("/auth/login", form);
             setAuthToken(response.data.token);
-            const resolvedSession = await resolveStoredSessionRole();
+            const resolvedSession = readStoredSession();
             onLogin(resolvedSession);
             toast.success("Login successful");
             const requestedRedirect = searchParams.get("redirect");

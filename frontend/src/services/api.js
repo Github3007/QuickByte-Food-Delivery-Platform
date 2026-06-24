@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const TOKEN_KEY = "quickbyte_token";
-const SESSION_KEY = "quickbyte_session";
 
 export const ROLES = {
     CUSTOMER: "CUSTOMER",
@@ -18,7 +17,7 @@ export const ROLE_LABELS = {
 };
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL || "https://quickbyte-food-delivery-platform.onrender.com",
+    baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:8081/",
 });
 
 export function getAuthToken() {
@@ -27,12 +26,10 @@ export function getAuthToken() {
 
 export function setAuthToken(token) {
     localStorage.setItem(TOKEN_KEY, token);
-    localStorage.removeItem(SESSION_KEY);
 }
 
 export function clearAuthToken() {
     localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(SESSION_KEY);
 }
 
 export function readStoredSession() {
@@ -49,13 +46,7 @@ export function readStoredSession() {
         return null;
     }
 
-    const storedSession = readStoredSessionMeta();
-    const role = normalizeRole(
-        payload?.role ||
-            payload?.roles ||
-            payload?.authorities ||
-            storedSession?.role,
-    );
+    const role = normalizeRole(payload?.role);
 
     return {
         token,
@@ -95,34 +86,6 @@ export function getRoleHome(role) {
     return "/";
 }
 
-export function setStoredSessionRole(role) {
-    const normalizedRole = normalizeRole(role);
-
-    if (!normalizedRole) {
-        localStorage.removeItem(SESSION_KEY);
-        return;
-    }
-
-    localStorage.setItem(SESSION_KEY, JSON.stringify({ role: normalizedRole }));
-}
-
-export async function resolveStoredSessionRole() {
-    const session = readStoredSession();
-
-    if (!session) {
-        return null;
-    }
-
-    if (session.role) {
-        return session;
-    }
-
-    const role = await detectCurrentUserRole();
-    setStoredSessionRole(role);
-
-    return readStoredSession();
-}
-
 api.interceptors.request.use((config) => {
     const token = getAuthToken();
 
@@ -134,49 +97,6 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
-async function detectCurrentUserRole() {
-    const probes = [
-        {
-            role: ROLES.DELIVERY_PARTNER,
-            request: () => api.get("/orders/delivery/my-orders"),
-        },
-        {
-            role: ROLES.RESTAURANT_OWNER,
-            request: () =>
-                api.get("/orders/restaurant-orders", {
-                    params: { page: 0, size: 1 },
-                }),
-        },
-        {
-            role: ROLES.CUSTOMER,
-            request: () =>
-                api.get("/orders/my-orders", {
-                    params: { page: 0, size: 1 },
-                }),
-        },
-    ];
-
-    for (const probe of probes) {
-        try {
-            await probe.request();
-            return probe.role;
-        } catch (error) {
-            if (error?.response?.status === 401) {
-                throw error;
-            }
-        }
-    }
-
-    return ROLES.CUSTOMER;
-}
-
-function readStoredSessionMeta() {
-    try {
-        return JSON.parse(localStorage.getItem(SESSION_KEY) || "{}");
-    } catch {
-        return {};
-    }
-}
 
 function normalizeRole(value) {
     if (!value) {

@@ -17,14 +17,13 @@ import api, {
     clearAuthToken,
     getApiErrorMessage,
     getRoleHome,
-    readStoredSession,
-    resolveStoredSessionRole,
+    readStoredSession
 } from "./services/api";
 
 function App() {
     const [session, setSession] = useState(() => readStoredSession());
     const [cartSummary, setCartSummary] = useState({ items: [], grandTotal: 0 });
-    const roleResolving = Boolean(session?.token && !session.role);
+    const roleResolving = false;
     const [theme, setTheme] = useState(() => {
         if (typeof window === "undefined") {
             return "light";
@@ -55,35 +54,6 @@ function App() {
             setCartSummary({ items: [], grandTotal: 0 });
         }
     }, [session]);
-
-    useEffect(() => {
-        let active = true;
-
-        if (!session?.token || session.role) {
-            return () => {
-                active = false;
-            };
-        }
-
-        resolveStoredSessionRole()
-            .then((resolvedSession) => {
-                if (active) {
-                    setSession(resolvedSession);
-                }
-            })
-            .catch((requestError) => {
-                if (requestError?.response?.status === 401) {
-                    clearAuthToken();
-                    if (active) {
-                        setSession(null);
-                    }
-                }
-            });
-
-        return () => {
-            active = false;
-        };
-    }, [session?.role, session?.token]);
 
     useEffect(() => {
         const timeoutId = window.setTimeout(refreshCart, 0);

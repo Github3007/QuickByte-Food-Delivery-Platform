@@ -17,7 +17,7 @@ export const ROLE_LABELS = {
 };
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:8081/",
+    baseURL: import.meta.env.VITE_API_BASE_URL || "https://quickbyte-food-delivery-platform.onrender.com",
 });
 
 export function getAuthToken() {

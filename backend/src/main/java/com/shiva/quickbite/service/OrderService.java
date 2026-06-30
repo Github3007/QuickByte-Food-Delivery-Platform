@@ -116,7 +116,7 @@ public class OrderService {
                 .build();
     }
 
-    public PagedResponse<Order> getRestaurantOrders(
+    public PagedResponse<OrderResponse> getRestaurantOrders(
             Authentication authentication, Pageable pageable
     ) {
 
@@ -128,10 +128,11 @@ public class OrderService {
                                 "User not found"
                         ));
 
-        Page<Order> page = orderRepository.findByRestaurantOwnerId(
-                owner.getId(), pageable
-        );
-        return PagedResponse.<Order>builder()
+        Page<OrderResponse> page = orderRepository.findByRestaurantOwnerId(
+                owner.getId(), pageable)
+                .map(this::mapToOrderResponse);
+
+        return PagedResponse.<OrderResponse>builder()
                 .content(page.getContent())
                 .page(page.getNumber())
                 .size(page.getSize())
@@ -194,10 +195,11 @@ public class OrderService {
         return "Order status updated successfully";
     }
 
-    public PagedResponse<Order> getAvailableOrders(Pageable pageable) {
-        Page<Order> page = orderRepository.findByStatus(OrderStatus.READY_FOR_PICKUP, pageable);
+    public PagedResponse<OrderResponse> getAvailableOrders(Pageable pageable) {
+        Page<OrderResponse> page = orderRepository.findByStatus(OrderStatus.READY_FOR_PICKUP, pageable)
+                .map(this::mapToOrderResponse);
 
-        return PagedResponse.<Order>builder()
+        return PagedResponse.<OrderResponse>builder()
                 .content(page.getContent())
                 .page(page.getNumber())
                 .size(page.getSize())
@@ -303,7 +305,7 @@ public class OrderService {
         return "Delivery status updated successfully";
     }
 
-    public List<Order> getMyDeliveries(
+    public List<OrderResponse> getMyDeliveries(
             Authentication authentication
     ) {
 
@@ -315,9 +317,11 @@ public class OrderService {
                                 "User not found"
                         ));
 
-        return orderRepository.findByDeliveryPartnerId(
-                partner.getId()
-        );
+        return orderRepository.findByDeliveryPartnerId(partner.getId())
+                        .stream()
+                        .map(this::mapToOrderResponse)
+                        .toList();
+
     }
 
     private OrderResponse mapToOrderResponse(

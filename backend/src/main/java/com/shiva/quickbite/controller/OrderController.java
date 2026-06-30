@@ -41,7 +41,7 @@ public class OrderController {
 
     @GetMapping("/restaurant-orders")
     @PreAuthorize("hasRole('RESTAURANT_OWNER')")
-    public PagedResponse<Order> getRestaurantOrders(
+    public PagedResponse<OrderResponse> getRestaurantOrders(
             Authentication authentication, Pageable pageable
     ) {
 
@@ -67,7 +67,7 @@ public class OrderController {
 
     @GetMapping("/delivery/available")
     @PreAuthorize("hasRole('DELIVERY_PARTNER')")
-    public PagedResponse<Order> getAvailableOrders(Pageable pageable) {
+    public PagedResponse<OrderResponse> getAvailableOrders(Pageable pageable) {
 
         return orderService.getAvailableOrders(pageable);
     }
@@ -102,7 +102,7 @@ public class OrderController {
 
     @GetMapping("/delivery/my-orders")
     @PreAuthorize("hasRole('DELIVERY_PARTNER')")
-    public List<Order> getMyDeliveries(
+    public List<OrderResponse> getMyDeliveries(
             Authentication authentication
     ) {
 

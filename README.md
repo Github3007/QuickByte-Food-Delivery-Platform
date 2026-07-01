@@ -11,9 +11,6 @@ The application follows modern backend development practices including JWT authe
 ### 🌐 Frontend
 https://quick-byte-food-delivery-platform.vercel.app/
 
-### ⚙️ Backend API
-https://quickbyte-food-delivery-platform.onrender.com
-
 ### 📖 Swagger API Documentation
 https://quickbyte-food-delivery-platform.onrender.com/swagger-ui/index.html
 

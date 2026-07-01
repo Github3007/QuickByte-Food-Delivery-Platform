@@ -1,51 +1,70 @@
-# 🍔 QuickByte - Food Delivery Platform
+# 🍔 QuickByte – Full Stack Food Delivery Platform
 
-QuickByte is a full-stack food delivery platform that enables customers to browse restaurants, order food, restaurant owners to manage menus and orders, and delivery partners to complete deliveries. The application is built using Spring Boot, React, PostgreSQL, and JWT Authentication following modern full-stack development practices.
+QuickByte is a full-stack food delivery platform built using **Spring Boot**, **React**, and **PostgreSQL**. The platform enables customers to browse restaurants, place food orders, restaurant owners to manage menus and orders, and delivery partners to complete deliveries through a secure role-based system.
+
+The application follows modern backend development practices including JWT authentication, RESTful APIs, DTO-based architecture, Docker support, cloud database integration, and production deployment.
 
 ---
 
-## 🚀 Features
+# 🚀 Live Demo
 
-### 👤 Authentication & Authorization
+### 🌐 Frontend
+https://quick-byte-food-delivery-platform.vercel.app/
+
+### ⚙️ Backend API
+https://quickbyte-food-delivery-platform.onrender.com
+
+### 📖 Swagger API Documentation
+https://quickbyte-food-delivery-platform.onrender.com/swagger-ui/index.html
+
+---
+
+# ✨ Features
+
+## 🔐 Authentication & Authorization
+
 - User Registration & Login
-- JWT-based Authentication
+- JWT Authentication
 - BCrypt Password Encryption
-- Role-Based Access Control
+- Role-Based Authorization
+- Stateless Authentication
 - Secure REST APIs
 
-### 👥 Supported Roles
+---
 
-- Customer
-- Restaurant Owner
-- Delivery Partner
-- Admin (Backend Ready)
+## 👥 User Roles
+
+- 👤 Customer
+- 🏪 Restaurant Owner
+- 🚴 Delivery Partner
+- 👨‍💼 Admin (Backend Ready)
 
 ---
 
-## 🍽 Customer Features
+# 🍽 Customer Features
 
 - Browse Restaurants
 - Search Restaurants
-- View Restaurant Menu
+- View Restaurant Menus
 - Add Items to Cart
 - Remove Items from Cart
-- View Cart Summary
+- Update Cart Quantity
 - Place Orders
 - View Order History
 - Track Order Status
 
 ---
 
-## 🏪 Restaurant Owner Features
+# 🏪 Restaurant Owner Features
 
-- Create Restaurant
+- Register Restaurant
 - Add Menu Items
-- View Restaurant Orders
+- Manage Restaurant Orders
 - Update Order Status
 
-Supported Workflow:
+### Restaurant Workflow
 
-```
+```text
 PENDING
    ↓
 ACCEPTED
@@ -57,38 +76,39 @@ READY_FOR_PICKUP
 
 ---
 
-## 🚴 Delivery Partner Features
+# 🚴 Delivery Partner Features
 
-- View Assigned Orders
+- View Available Orders
 - Accept Delivery
-- Mark Order as Delivered
+- View Assigned Orders
+- Update Delivery Status
 
-Delivery Workflow
+### Delivery Workflow
 
-```
+```text
 READY_FOR_PICKUP
         ↓
-ASSIGNED
+OUT_FOR_DELIVERY
         ↓
 DELIVERED
 ```
 
 ---
 
-## 🔐 Security
+# 🔒 Security
 
 - Spring Security
 - JWT Authentication
-- Role-Based Authorization
-- Protected APIs
-- Password Encryption using BCrypt
-- Stateless Authentication
+- BCrypt Password Encoding
+- Role-Based Access Control
+- Stateless Session Management
+- Protected REST APIs
 
 ---
 
-## ⚙ Backend Technologies
+# 🛠 Backend Tech Stack
 
-- Java 21
+- Java 17
 - Spring Boot
 - Spring Security
 - Spring Data JPA
@@ -97,26 +117,35 @@ DELIVERED
 - Maven
 - Lombok
 - JWT
-- Swagger/OpenAPI
+- Swagger / OpenAPI
+- Docker
 
 ---
 
-## 🎨 Frontend Technologies
+# 🎨 Frontend Tech Stack
 
 - React
 - Vite
 - React Router
 - Axios
 - CSS3
-- Responsive Design
+- Responsive UI
 
 ---
 
-## 🗄 Database
+# ☁️ Cloud & Deployment
 
-PostgreSQL
+- Frontend deployed on **Vercel**
+- Backend deployed on **Render**
+- Database hosted on **Neon PostgreSQL**
+- Environment Variables
+- Dockerized Backend
 
-Major Tables
+---
+
+# 🗄 Database
+
+### Tables
 
 - Users
 - Restaurants
@@ -128,9 +157,9 @@ Major Tables
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
-```
+```text
 QuickByte
 │
 ├── backend
@@ -141,66 +170,59 @@ QuickByte
 │   ├── dto
 │   ├── config
 │   ├── security
-│   └── exception
+│   ├── exception
+│   └── util
 │
 ├── frontend
 │   ├── components
 │   ├── pages
 │   ├── services
-│   └── assets
+│   ├── assets
+│   └── styles
 │
 └── README.md
 ```
 
 ---
 
-## 📌 API Modules
+# 📡 REST API Modules
 
 ### Authentication
 
-- Register User
-- Login User
+- Register
+- Login
 
-### Restaurant
+### Restaurants
 
 - Create Restaurant
 - View Restaurants
-- View Restaurant Menu
+- Restaurant Details
 
 ### Menu
 
-- Add Menu Item
+- Add Menu Items
+- View Menu
 
 ### Cart
 
-- Add to Cart
+- Add Item
+- Remove Item
 - View Cart
-- Remove from Cart
 
 ### Orders
 
 - Place Order
-- View Customer Orders
-- View Restaurant Orders
-- Assign Delivery Partner
+- Customer Orders
+- Restaurant Orders
+- Available Deliveries
+- Assign Delivery
 - Update Order Status
-- View Delivery Orders
 
 ---
 
-## 📄 API Documentation
+# 🔄 Complete Order Lifecycle
 
-Swagger UI
-
-```
-http://localhost:8081/swagger-ui/index.html
-```
-
----
-
-## 🔄 Order Lifecycle
-
-```
+```text
 PENDING
    ↓
 ACCEPTED
@@ -216,9 +238,33 @@ DELIVERED
 
 ---
 
-## 🛠 Setup Instructions
+# 📖 API Documentation
 
-### Backend
+After running the backend:
+
+```
+http://localhost:8081/swagger-ui/index.html
+```
+
+For deployed application:
+
+```
+https://quickbyte-food-delivery-platform.onrender.com/swagger-ui/index.html
+```
+
+---
+
+# ⚙️ Local Setup
+
+## Clone Repository
+
+```bash
+git clone https://github.com/Github3007/QuickByte.git
+```
+
+---
+
+## Backend
 
 ```bash
 cd backend
@@ -228,7 +274,7 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-Backend runs on
+Runs at
 
 ```
 http://localhost:8081
@@ -236,7 +282,7 @@ http://localhost:8081
 
 ---
 
-### Frontend
+## Frontend
 
 ```bash
 cd frontend
@@ -246,7 +292,7 @@ npm install
 npm run dev
 ```
 
-Frontend runs on
+Runs at
 
 ```
 http://localhost:5173
@@ -254,9 +300,25 @@ http://localhost:5173
 
 ---
 
-## 🧪 Testing
+# 🔑 Environment Variables
 
-Backend APIs can be tested using:
+Backend requires:
+
+```properties
+SPRING_DATASOURCE_URL=
+
+SPRING_DATASOURCE_USERNAME=
+
+SPRING_DATASOURCE_PASSWORD=
+
+JWT_SECRET=
+```
+
+---
+
+# 🧪 API Testing
+
+Supported Tools
 
 - Swagger UI
 - Bruno
@@ -264,42 +326,62 @@ Backend APIs can be tested using:
 
 ---
 
-## 📸 Screenshots
+# 📸 Screenshots
 
-- Login Page
+- Login
+  <img width="832" height="405" alt="image" src="https://github.com/user-attachments/assets/31997641-c680-4b8d-a1b1-578181130c8a" />
+
+- Register
+  <img width="674" height="358" alt="image" src="https://github.com/user-attachments/assets/3aff9865-ffb5-4613-b787-53fba6ddc8c5" />
+
 - Restaurant Listing
-- Menu
-- Cart
-- Orders
+  <img width="842" height="401" alt="image" src="https://github.com/user-attachments/assets/3d725527-426a-4700-a28c-9e7a610304ca" />
+
+- Restaurant Menu
+  <img width="779" height="401" alt="image" src="https://github.com/user-attachments/assets/28a2074a-b7c6-44fa-8731-28ce2efdf985" />
+
+- Shopping Cart
+  <img width="773" height="333" alt="image" src="https://github.com/user-attachments/assets/78af335a-3318-4647-b8a7-010b068bc90e" />
+
+- Customer Orders
+  <img width="745" height="400" alt="image" src="https://github.com/user-attachments/assets/bc3308a6-06bf-4e6b-afed-a20fa00787ae" />
+
+- Restaurant Dashboard
+  <img width="615" height="401" alt="image" src="https://github.com/user-attachments/assets/14f6a327-0c06-42ef-929f-6085aac71d0c" />
+
 - Delivery Dashboard
+  <img width="633" height="382" alt="image" src="https://github.com/user-attachments/assets/d47f8439-1a5b-4787-84a7-a64868541a2f" />
 
 ---
 
-## 🔮 Future Improvements
+# 🚀 Future Enhancements
 
-- Online Payment Integration
-- Restaurant Image Upload
-- Food Image Upload
+- Online Payments
+- Cloudinary Image Upload
 - Email Notifications
 - Live Order Tracking
-- Reviews & Ratings
+- Ratings & Reviews
 - Wishlist
-- Coupons & Offers
-- Docker Deployment
+- Coupons & Discounts
+- Redis Caching
 - CI/CD Pipeline
 - Microservices Architecture
+- Kubernetes Deployment
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Shiva Kumar**
 
 Java Backend Developer
 
-GitHub:
+GitHub
+
 https://github.com/Github3007
 
 ---
 
-## ⭐ If you found this project useful, consider giving it a Star!
+## ⭐ Support
+
+If you found this project helpful, consider giving it a ⭐ on GitHub.
